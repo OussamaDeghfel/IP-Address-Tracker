@@ -20,7 +20,7 @@ const AddressTracker = () => {
 
   return (
     <div>
-      <div className="bg-pattern h-[30vh] justify-center items-center m-auto flex flex-col">
+      <div className="bg-pattern h-[40vh] justify-center items-center m-auto flex flex-col">
         <h1 className="text-3xl m-5 font-bold  text-white">
           IP Address Tracker
         </h1>
@@ -39,7 +39,7 @@ const AddressTracker = () => {
           </button>
         </div>
 
-        <div className="flex justify-center items-center m-auto shadow-xl  bg-white rounded-lg w-[80vh] h-32">
+        <div className="flex absolute bottom-10 translate-y-[-350%]  justify-center items-center m-auto shadow-xl  bg-white rounded-lg w-[80vh] h-32">
         {address && (
           <>
             <p className="flex flex-col p-5 pr-8">
@@ -63,8 +63,9 @@ const AddressTracker = () => {
             </p>
           </>
         )}
+        </div>
       </div>
-      </div>
+      
       
     </div>
   );
