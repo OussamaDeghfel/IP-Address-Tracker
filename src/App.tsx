@@ -1,14 +1,8 @@
-
-import './App.css'
-
+import AddressTracker from "./components/addressTracker"
 function App() {
-
-
   return (
     <>
-      <div>
-        hello ip address tracker
-      </div>
+      <AddressTracker />
     </>
   )
 }
