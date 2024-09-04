@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface addressType {
     ip: string;
@@ -17,11 +17,6 @@ const AddressTracker = () => {
     setAddress(response.data);
   };
 
-  useEffect(() => {
-    fetchAddress(ipAddress);
-  }, [ipAddress]);
-
-  console.log("Address: ", address);
   return (
     <div>
       <h1>Track IP ADDRESS</h1>
