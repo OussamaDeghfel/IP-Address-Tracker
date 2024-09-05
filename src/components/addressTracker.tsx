@@ -15,16 +15,25 @@ interface addressType {
 
 const AddressTracker = () => {
   const [address, setAddress] = useState<addressType | null>(null);
-  const [ipAddress, setIpAddress] = useState("");
+  const [ipAddress, setIpAddress] = useState<string>('198.53.26.53');
 
   const fetchAddress = async (ipAddress: string) => {
     const response = await axios.get(`https://ipinfo.io/${ipAddress}/geo`);
     setAddress(response.data);
   };
 
+  const handleKeyDown = (e:any) => {
+    if (e.key === "Enter") {
+      fetchAddress(e.target.value);
+      setIpAddress("")
+    }
+  }
+
   const location = address?.loc
   const latitude = location?.split(",")[0]   
   const longitude = location?.split(",")[1]
+
+  console.log("lat",latitude,"lng",longitude)
 
   return (
     <div>
@@ -37,7 +46,8 @@ const AddressTracker = () => {
             type="string"
             placeholder="Search for any IP address or domain"
             className="p-2 pl-4 w-full rounded-l-md"
-            onChange={(e) => setIpAddress(e.target.value)}
+            // onChange={(e) => setIpAddress(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           />
           <button
             onClick={() => fetchAddress(ipAddress)}
@@ -75,7 +85,7 @@ const AddressTracker = () => {
       </div>
 
       <div>
-      <MapPlace lat={latitude} lng={longitude } />
+        {address?.loc && <MapPlace lat={latitude} lng={longitude} />}
       </div>
       
     </div>
