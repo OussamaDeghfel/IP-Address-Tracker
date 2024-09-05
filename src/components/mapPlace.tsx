@@ -19,7 +19,8 @@ const MapPlace:React.FC<MapPlaceProps> = ({ lat, lng }) => {
     <MapContainer center={{
         lat : Number(lat),
         lng : Number(lng)
-    }} zoom={13} style={{ height: "700px", width: "700px" }}>
+    }} zoom={13} style={{ height: "100vh", width: "100vh" }}>
+
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

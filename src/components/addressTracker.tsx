@@ -2,38 +2,39 @@ import axios from "axios";
 import { useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import MapPlace from "./mapPlace";
+import AddressDetails from "./addressDetails";
 
-interface addressType {
+export interface addressType {
   ip: string;
   country: string;
   city: string;
   timezone: string;
-  loc: string
-  lat: string 
-  lng: string
+  loc: string;
+  lat: string;
+  lng: string;
 }
 
 const AddressTracker = () => {
   const [address, setAddress] = useState<addressType | null>(null);
-  const [ipAddress, setIpAddress] = useState<string>('198.53.26.53');
+  const [ipAddress, setIpAddress] = useState<string>();
 
   const fetchAddress = async (ipAddress: string) => {
     const response = await axios.get(`https://ipinfo.io/${ipAddress}/geo`);
     setAddress(response.data);
   };
 
-  const handleKeyDown = (e:any) => {
+  const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       fetchAddress(e.target.value);
-      setIpAddress("")
+      setIpAddress("");
     }
-  }
+  };
 
-  const location = address?.loc
-  const latitude = location?.split(",")[0]   
-  const longitude = location?.split(",")[1]
+  const location = address?.loc;
+  const latitude = location?.split(",")[0];
+  const longitude = location?.split(",")[1];
 
-  console.log("lat",latitude,"lng",longitude)
+  console.log("lat", latitude, "lng", longitude);
 
   return (
     <div>
@@ -56,38 +57,16 @@ const AddressTracker = () => {
             <FaAngleRight />
           </button>
         </div>
-
-        <div className="flex absolute bottom-10 translate-y-[-350%]  justify-center items-center m-auto shadow-xl  bg-white rounded-lg w-[80vh] h-32">
-        {address && (
-          <>
-            <p className="flex flex-col p-5 pr-8">
-              <span className="text-md text-gray-400">ip address</span>{" "}
-              <span className="font-bold text-2xl">{address.ip}</span>
-            </p>
-            <span className="h-16 w-0.5 bg-gray-400"></span>
-            <p className="flex flex-col p-5 pr-8">
-              <span className="text-md text-gray-400">Country</span>{" "}
-              <span className="font-bold text-2xl">{address.country}</span>
-            </p>
-            <span className="h-16 w-0.5 bg-gray-400"></span>
-            <p className="flex flex-col p-5 pr-8">
-              <span className="text-md text-gray-400">City</span>{" "}
-              <span className="font-bold text-2xl">{address.city}</span>
-            </p>
-            <span className="h-16 w-0.5 bg-gray-400"></span>
-            <p className="flex flex-col p-5 pr-8">
-              <span className="text-md text-gray-400">timezone</span>{" "}
-              <span className="font-bold text-2xl">{address.timezone}</span>
-            </p>
-          </>
-        )}
+      </div>
+      {/* <div className="z-10 flex absolute top-0 translate-x-[30%] justify-center items-center m-auto"> */}
+      <div className="z-10 flex absolute translate-y-[300%] translate-x-[30%] justify-center items-center m-auto">
+        {address && <AddressDetails address={address} />}
+      </div>
+      {address?.loc && (
+        <div className="absolute translate-x-[30%] z-[-10]">
+          <MapPlace lat={latitude} lng={longitude} />
         </div>
-      </div>
-
-      <div>
-        {address?.loc && <MapPlace lat={latitude} lng={longitude} />}
-      </div>
-      
+      )}
     </div>
   );
 };

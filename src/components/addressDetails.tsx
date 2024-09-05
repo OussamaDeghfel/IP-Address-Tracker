@@ -1,20 +1,14 @@
 import React from 'react'
+import { addressType } from './addressTracker'
 
 interface addressDetailsType {
-    address?: string[]
-    ip: string;
-    country: string;
-    city: string;
-    timezone: string;
-    loc: string
-    lat: string 
-    lng: string
+    address: addressType | null
   }
 
 const AddressDetails:React.FC<addressDetailsType> = ({address}) => {
   return (
     <div>
-        <div className="flex bottom-10 translate-y-[-350%]  justify-center items-center m-auto shadow-xl  bg-white rounded-lg w-[80vh] h-32">
+        <div className="flex translate-y-[-350%]  justify-center items-center m-auto shadow-xl  bg-white rounded-lg w-[80vh] h-32">
         {address && (
           <>
             <p className="flex flex-col p-5 pr-8">
