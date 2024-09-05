@@ -1,12 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
+import MapPlace from "./mapPlace";
 
 interface addressType {
   ip: string;
   country: string;
   city: string;
   timezone: string;
+  loc: string
+  lat: string 
+  lng: string
 }
 
 const AddressTracker = () => {
@@ -17,6 +21,10 @@ const AddressTracker = () => {
     const response = await axios.get(`https://ipinfo.io/${ipAddress}/geo`);
     setAddress(response.data);
   };
+
+  const location = address?.loc
+  const latitude = location?.split(",")[0]   
+  const longitude = location?.split(",")[1]
 
   return (
     <div>
@@ -65,7 +73,10 @@ const AddressTracker = () => {
         )}
         </div>
       </div>
-      
+
+      <div>
+      <MapPlace lat={latitude} lng={longitude } />
+      </div>
       
     </div>
   );

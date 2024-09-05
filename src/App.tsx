@@ -1,10 +1,10 @@
 import AddressTracker from "./components/addressTracker"
-import MapPlace from "./components/mapPlace"
+// import MapPlace from "./components/mapPlace"
 function App() {
   return (
     <>
       <AddressTracker />
-      <MapPlace />
+      {/* <MapPlace /> */}
     </>
   )
 }
