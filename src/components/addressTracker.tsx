@@ -37,16 +37,17 @@ const AddressTracker = () => {
   console.log("lat", latitude, "lng", longitude);
 
   return (
-    <div>
-      <div className="bg-pattern h-[40vh] justify-center items-center m-auto flex flex-col">
+    <div className="flex flex-col w-full border-2 border-red-700">
+
+      <div className="flex flex-col bg-pattern bg-repeat bg-center bg-cover w-full h-96 justify-center items-center">
         <h1 className="text-3xl m-5 font-bold  text-white">
           IP Address Tracker
         </h1>
-        <div className="w-[600px] justify-center flex shadow-lg rounded-md">
+        <div className="w-fit justify-center flex rounded-lg shadow-lg">
           <input
             type="string"
             placeholder="Search for any IP address or domain"
-            className="p-2 pl-4 w-full rounded-l-md"
+            className="p-2 pl-4 w-80 h-14 rounded-l-md focus:outline-none"
             // onChange={(e) => setIpAddress(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           />
@@ -58,15 +59,18 @@ const AddressTracker = () => {
           </button>
         </div>
       </div>
-      {/* <div className="z-10 flex absolute top-0 translate-x-[30%] justify-center items-center m-auto"> */}
-      <div className="z-10 flex absolute translate-y-[300%] translate-x-[30%] justify-center items-center m-auto">
-        {address && <AddressDetails address={address} />}
+
+    {address &&
+      <div className="z-10 flex flex-col text-center border-2 border-blue-600 shadow-black shadow-2xl rounded-3xl justify-center items-center m-auto">
+        <AddressDetails address={address} />
       </div>
-      {address?.loc && (
-        <div className="absolute translate-x-[30%] z-[-10]">
+      }
+       
+      {/* {address?.loc && (
+        <div className="translate-x-[30%] z-[-10]">
           <MapPlace lat={latitude} lng={longitude} />
         </div>
-      )}
+      )}  */}
     </div>
   );
 };
