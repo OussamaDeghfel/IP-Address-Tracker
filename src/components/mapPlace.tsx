@@ -12,10 +12,7 @@ const MapPlace:React.FC<MapPlaceProps> = ({ lat, lng }) => {
     const position : LatLngExpression= [Number(lat), Number(lng)];
     console.log("position : ",position)
   return (
-    <div style={{
-        height:"500px",
-        width:"500px"
-    }}>
+    <div>
     <MapContainer center={{
         lat : Number(lat),
         lng : Number(lng)
