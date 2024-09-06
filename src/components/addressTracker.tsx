@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import MapPlace from "./mapPlace";
 import AddressDetails from "./addressDetails";
@@ -24,11 +24,13 @@ const AddressTracker = () => {
 
   useEffect(() => {
     fetchAddress(ipAddress);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      fetchAddress(e.target.value);
+      const input = e.target as HTMLInputElement;
+      fetchAddress(input.value);
       setIpAddress("");
     }
   };

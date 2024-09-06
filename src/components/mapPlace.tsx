@@ -1,6 +1,6 @@
 import { LatLngExpression } from "leaflet";
 import React from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 interface MapPlaceProps {
@@ -25,11 +25,7 @@ const MapPlace: React.FC<MapPlaceProps> = ({ lat, lng }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <Marker position={{ lat: Number(lat), lng: Number(lng) }}>
-          <Popup>
-            This is your selected position: {lat}, {lng}
-          </Popup>
-        </Marker>
+        <Marker position={{ lat: Number(lat), lng: Number(lng) }} />
       </MapContainer>
     </div>
   );
