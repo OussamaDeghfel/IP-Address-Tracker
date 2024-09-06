@@ -66,13 +66,9 @@ const AddressTracker = () => {
 
       </div>
 
-    
-       
-      {/* {address?.loc && (
-        <div className="translate-x-[30%] z-[-10]">
+      {address?.loc && (
           <MapPlace lat={latitude} lng={longitude} />
-        </div>
-      )}  */}
+      )} 
     </div>
   );
 };
