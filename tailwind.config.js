@@ -8,7 +8,7 @@ export default {
     extend: {
       backgroundImage: {
         'pattern': "url('./src/assets/pattern-bg-desktop.png')",
-      }
+      },
     },
   },
   plugins: [],
