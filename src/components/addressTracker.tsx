@@ -16,7 +16,7 @@ export interface addressType {
 
 const AddressTracker = () => {
   const [address, setAddress] = useState<addressType | null>(null);
-  const [ipAddress, setIpAddress] = useState<string>("8.8.8.8");
+  const [ipAddress, setIpAddress] = useState("");
   const fetchAddress = async (ipAddress: string) => {
     const response = await axios.get(`https://ipinfo.io/${ipAddress}/geo`);
     setAddress(response.data);
@@ -44,15 +44,15 @@ const AddressTracker = () => {
   return (
     <div className="flex flex-col w-full">
 
-      <div className="flex flex-col bg-pattern bg-repeat bg-center bg-cover w-full h-96 justify-between items-center">
-        <h1 className="text-3xl m-5 font-bold text-white mt-20">
+      <div className="flex shadow-inner h-72 flex-col bg-pattern bg-repeat bg-center bg-cover w-full justify-center items-center">
+        <h1 className="text-3xl m-5 font-bold text-white mt-32">
           IP Address Tracker
         </h1>
-        <div className="w-fit justify-center flex rounded-lg shadow-lg">
+        <div className="justify-center lg:w-1/3 flex rounded-lg shadow-lg">
           <input
             type="string"
             placeholder="Search for any IP address or domain"
-            className="p-2 pl-4 w-80 h-14 rounded-l-md focus:outline-none font-medium text-xl overflow-x-scroll"
+            className="p-2 py-3 w-full rounded-l-md focus:outline-none font-medium overflow-x-scroll"
             // onChange={(e) => setIpAddress(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           />
