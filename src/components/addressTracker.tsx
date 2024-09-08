@@ -15,35 +15,32 @@ export interface addressType {
 }
 
 const AddressTracker = () => {
-  const [address, setAddress] = useState<addressType | null>(null);
-  const [ipAddress, setIpAddress] = useState("");
-  const fetchAddress = async (ipAddress: string) => {
+  const [addressData, setAddressData] = useState<addressType | null>(null);
+  const [inputValue, setInputValue] = useState("");
+
+  const fetchAddressData = async (ipAddress: string) => {
     const response = await axios.get(`https://ipinfo.io/${ipAddress}/geo`);
-    setAddress(response.data);
+    setAddressData(response.data);
   };
 
   useEffect(() => {
-    fetchAddress(ipAddress);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+    fetchAddressData(inputValue);
+  }, [inputValue]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      const input = e.target as HTMLInputElement;
-      fetchAddress(input.value);
-      setIpAddress("");
+      fetchAddressData((e.target as HTMLInputElement).value);
+      setInputValue("");
     }
   };
 
-  const location = address?.loc;
-  const latitude = location?.split(",")[0];
-  const longitude = location?.split(",")[1];
-
-  console.log("lat", latitude, "lng", longitude);
+  const location = addressData?.loc;
+  const [latitude, longitude] = location
+    ? location.split(",").map((coord) => Number(coord))
+    : [0, 0];
 
   return (
     <div className="flex flex-col w-full">
-
       <div className="flex shadow-inner h-72 flex-col bg-pattern bg-repeat bg-center bg-cover w-full justify-center items-center">
         <h1 className="text-3xl m-5 font-bold text-white mt-32">
           IP Address Tracker
@@ -53,24 +50,23 @@ const AddressTracker = () => {
             type="string"
             placeholder="Search for any IP address or domain"
             className="p-2 py-3 w-full rounded-l-md focus:outline-none font-medium overflow-x-scroll"
-            // onChange={(e) => setIpAddress(e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e)}
+            onKeyDown={handleKeyDown}
           />
           <button
-            onClick={() => fetchAddress(ipAddress)}
+            onClick={() => fetchAddressData(inputValue)}
             className="bg-black text-white rounded-r-md p-2"
           >
             <FaAngleRight />
           </button>
         </div>
-        
-        <AddressDetails address={address} />
+
+        <AddressDetails address={addressData} />
 
       </div>
 
-      {address?.loc && (
-          <MapPlace lat={latitude} lng={longitude} />
-      )} 
+      {addressData?.loc && (
+        <MapPlace lat={latitude} lng={longitude} />
+      )}
     </div>
   );
 };
