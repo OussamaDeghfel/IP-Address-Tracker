@@ -4,8 +4,8 @@ import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 interface MapPlaceProps {
-  lat?: string;
-  lng?: string;
+  lat?: number | string;
+  lng?: number | string;
 }
 
 const MapPlace: React.FC<MapPlaceProps> = ({ lat, lng }) => {
