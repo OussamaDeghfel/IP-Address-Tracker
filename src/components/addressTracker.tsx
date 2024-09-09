@@ -10,8 +10,8 @@ export interface addressType {
   city: string;
   timezone: string;
   loc: string;
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
 }
 
 const AddressTracker = () => {
