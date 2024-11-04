@@ -42,31 +42,29 @@ const AddressTracker = () => {
   return (
     <div className="flex flex-col w-full">
       <div className="flex shadow-inner h-72 flex-col bg-pattern bg-repeat bg-center bg-cover w-full justify-center items-center">
-        <h1 className="text-3xl m-5 font-bold text-white mt-32">
-          IP Address Tracker
-        </h1>
-        <div className="justify-center lg:w-1/3 flex rounded-lg shadow-lg">
-          <input
-            type="string"
-            placeholder="Search for any IP address or domain"
-            className="p-2 py-3 w-full rounded-l-md focus:outline-none font-medium overflow-x-scroll"
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            onClick={() => fetchAddressData(inputValue)}
-            className="bg-black text-white rounded-r-md p-2"
-          >
-            <FaAngleRight />
-          </button>
+        <div>
+          <h1 className="text-3xl m-5 font-bold text-white mt-32">
+            IP Address Tracker
+          </h1>
+          <div className="justify-center w-full h-fit flex rounded-lg shadow-lg">
+            <input
+              type="string"
+              placeholder="Search for any IP address or domain"
+              className="p-2 py-3 w-full rounded-l-md focus:outline-none font-medium overflow-x-scroll"
+              onKeyDown={handleKeyDown}
+            />
+            <button
+              onClick={() => fetchAddressData(inputValue)}
+              className="bg-black text-white rounded-r-md p-2"
+            >
+              <FaAngleRight />
+            </button>
+          </div>
         </div>
-
-        <AddressDetails address={addressData} />
-
+        <div className="w-fit h-36"><AddressDetails address={addressData} /></div>
       </div>
 
-      {addressData?.loc && (
-        <MapPlace lat={latitude} lng={longitude} />
-      )}
+      {addressData?.loc && <MapPlace lat={latitude} lng={longitude} />}
     </div>
   );
 };
